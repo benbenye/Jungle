@@ -26,21 +26,32 @@ $(function(){
 				domAnimalName[i] = {team:'',name:''};
 				domAnimalName[i].team = randomAnimals[i];
 				domAnimalName[i].name = animalName[Math.abs(randomAnimals[i]) -1]
-				$('.animals').append($('<div class="animal animal'+(i+1)+'"></div>').attr("team", domAnimalName[i].team).text(domAnimalName[i].name));
+				$('.animals').append($('<div class="animal hide animal'+(i+1)+'"></div>').attr("team", domAnimalName[i].team).text(domAnimalName[i].name));
 			}
 			
 		},
 		showCard : function(){
 			if($(this).attr('team') > 0){
-				$(this).css({background:'red',textIndent:0});
+				$(this).css({background:'red',textIndent:0}).removeClass('hide').addClass('normal');
 			}else{
-				$(this).css({background:'green',textIndent:0});
+				$(this).css({background:'green',textIndent:0}).removeClass('hide').addClass('normal');
 			}
 		},
 		move : function(){
 
+		},
+		activeCard : function(){
+			$(this).removeClass('normal').addClass('active');
+			animalObj.deriction();
+
+		},
+		deriction : function(){
+			$('.active').append('<div class="deriction"><div class="top"></div><div class="right"></div><div class="bottom"></div><div class="left"></div></div>');
 		}
 	}
 	animalObj.init();
-	$('.animals').on('click','.animal',animalObj.showCard);
+	$('.animals').on('click','.hide',animalObj.showCard);
+	$('.animals').on('click','.normal',animalObj.activeCard);
+
+
 });

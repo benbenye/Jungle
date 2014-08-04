@@ -18,4 +18,36 @@ blockquote:before, blockquote:after, q:before, q:after { content: ''; content: n
 
 table { border-collapse: collapse; border-spacing: 0; }
 
-.box, .ref { display: inline-block; *display: inline; *zoom: 1; vertical-align: middle; width: 29.58984%; }
+html{height: 100%;}
+body{width: 100%; height: 100%;}
+.box, .ref { display: inline-block; *display: inline; *zoom: 1; vertical-align: middle; width: 303px; }
+.ref{height: 100%;width: 0;}
+.box{position: relative;}
+.item{width: 100px; height: 100px; border: 1px solid #999; margin-bottom: -1px; margin-right: -1px; float: left;}
+.animals{position: absolute; top: -15px; left: -15px;}
+.animal{position: absolute; width: 30px; height: 30px; background: yellow; border-radius: 50%; color: #fff; font-weight: bold; line-height: 30px; cursor: pointer;}
+.animal.hide{position: absolute; width: 30px; height: 30px; background: yellow; text-indent: -9999px; border-radius: 50%; color: #fff; font-weight: bold; line-height: 30px; cursor: pointer;}
+.animal.active{border: 1px solid blue;}
+.animal1{top: 0px;left: 0px;}
+.animal2{top: 0px;left: 101px;}
+.animal3{top: 0px;left: 202px;}
+.animal4{top: 0px;left: 303px;}
+.animal5{top: 101px;left: 0px;}
+.animal6{top: 101px;left: 101px;}
+.animal7{top: 101px;left: 202px;}
+.animal8{top: 101px;left: 303px;}
+.animal9{top: 202px;left: 0px;}
+.animal10{top: 202px;left: 101px;}
+.animal11{top: 202px;left: 202px;}
+.animal12{top: 202px;left: 303px;}
+.animal13{top: 303px;left: 0px;}
+.animal14{top: 303px;left: 101px;}
+.animal15{top: 303px;left: 202px;}
+.animal16{top: 303px;left: 303px;}
+
+.deriction{position: absolute;width: 0; height: 0; top: 15px; left: 15px;}
+.deriction .top,.deriction .right,.deriction .bottom,.deriction .left{position: absolute;}
+.deriction .top{width: 2px; height: 50px; background: pink; top: -70px; left: 0;}
+.deriction .right{width: 50px; height: 2px; background: pink; top: 0; left: 20px;}
+.deriction .bottom{width: 2px; height: 50px; background: pink; top: 20px; left: 0;}
+.deriction .left{width: 50px; height: 2px; background: pink; top: 0; left: -70px;}
