@@ -25,10 +25,13 @@ $(function(){
 			for(var i = 0, l = randomAnimals.length; i < l; ++i){
 				domAnimalName[i] = {team:'',name:''};
 				domAnimalName[i].team = randomAnimals[i];
-				domAnimalName[i].name = animalName[Math.abs(randomAnimals[i]) -1]
+				domAnimalName[i].name = animalName[Math.abs(randomAnimals[i]) -1];
 				$('.animals').append($('<div class="animal hide animal'+(i+1)+'"></div>').attr("team", domAnimalName[i].team).text(domAnimalName[i].name));
 			}
-			
+			//  添加坐标
+			$('.animal').each(function(i){
+				$(this).data('coordinate',{x:i % 4,y:Math.floor(i / 4)});
+			});
 		},
 		showCard : function(){
 			if($(this).attr('team') > 0){
@@ -43,29 +46,38 @@ $(function(){
 		activeCard : function(){
 			$('.active').removeClass('active');
 			$(this).addClass('active');
-			var top = $(this).css('top'),
-				left = $(this).css('left');
-			animalObj.deriction(top, left);
+			var coordinate = $(this).data('coordinate');
+			animalObj.deriction(coordinate);
 		},
-		deriction : function(tops, lefts){
+		deriction : function(coordinate){
 			$('.deriction').remove();
 			var top = right = bottom = left = 0;
-			if(tops === '0px' && lefts === '0px'){
+			if(coordinate.x === 0 && coordinate.y === 0){
+				//左上角
 				right = bottom = 1;
-			}else if(tops === '303px' && lefts === '303px'){
+				// $('.animal').attr('left')
+				// 查找临近棋子状态，不用each
+			}else if(coordinate.x === 3 && coordinate.y === 3){
+				// 右下角
 				left = top = 1;
-			}else if(tops === '0px' && lefts === '303px'){
+			}else if(coordinate.x === 3 && coordinate.y === 0){
+				// 右上角
 				left = bottom = 1;
-			}else if(tops === '303px' && lefts === '0px'){
+			}else if(coordinate.x === 0 && coordinate.y === 3){
+				// 左下角
 				right = top = 1;
-			}else if(lefts === '0px'){
-				top = right = bottom = 1;
-			}else if(tops === '303px'){
-				top = right = left =1;
-			}else if(lefts === '303px'){
-				top = bottom = left = 1;
-			}else if(tops === '0px'){
+			}else if(coordinate.y === 0){
+				// 顶部
 				right = bottom = left = 1;
+			}else if(coordinate.x === 3){
+				// 右侧
+				top = bottom = left = 1;
+			}else if(coordinate.y === 3){
+				// 左侧
+				top = right = left =1;
+			}else if(coordinate.x === 0){
+				// 底部
+				top = right = bottom = 1;
 			}else{
 				top = right = bottom = left = 1;
 			}
