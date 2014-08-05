@@ -67,5 +67,11 @@ table {
 	width:percentage($width*3/$maxWidth);
 }
 .item{
-	width:percentage($width/($width*3)/$maxWidth);
+}
+
+@for $i from 1px through 16px {
+	.animal#{$i / ($i * 0 + 1)} {
+		top: floor(($i - 1) / 4) * 101;
+		left: ($i - 1) % 4 * 101;
+	}
 }
