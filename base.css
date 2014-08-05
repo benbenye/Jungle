@@ -20,6 +20,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 
 html{height: 100%;}
 body{width: 100%; height: 100%;}
+.none{display: none;}
 .box, .ref { display: inline-block; *display: inline; *zoom: 1; vertical-align: middle; width: 303px; }
 .ref{height: 100%;width: 0;}
 .box{position: relative;}

@@ -41,12 +41,35 @@ $(function(){
 
 		},
 		activeCard : function(){
-			$(this).removeClass('normal').addClass('active');
-			animalObj.deriction();
-
+			$('.active').removeClass('active');
+			$(this).addClass('active');
+			var top = $(this).css('top'),
+				left = $(this).css('left');
+			animalObj.deriction(top, left);
 		},
-		deriction : function(){
-			$('.active').append('<div class="deriction"><div class="top"></div><div class="right"></div><div class="bottom"></div><div class="left"></div></div>');
+		deriction : function(tops, lefts){
+			$('.deriction').remove();
+			var top = right = bottom = left = 0;
+			if(tops === '0px' && lefts === '0px'){
+				right = bottom = 1;
+			}else if(tops === '303px' && lefts === '303px'){
+				left = top = 1;
+			}else if(tops === '0px' && lefts === '303px'){
+				left = bottom = 1;
+			}else if(tops === '303px' && lefts === '0px'){
+				right = top = 1;
+			}else if(lefts === '0px'){
+				top = right = bottom = 1;
+			}else if(tops === '303px'){
+				top = right = left =1;
+			}else if(lefts === '303px'){
+				top = bottom = left = 1;
+			}else if(tops === '0px'){
+				right = bottom = left = 1;
+			}else{
+				top = right = bottom = left = 1;
+			}
+			$('.active').append('<div class="deriction"><div class="top '+(top?'':'none')+'"></div><div class="right '+(right?'':'none')+'"></div><div class="bottom '+(bottom?'':'none')+'"></div><div class="left '+(left?'':'none')+'"></div></div>');
 		}
 	}
 	animalObj.init();
