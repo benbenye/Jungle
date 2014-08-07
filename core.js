@@ -7,7 +7,18 @@ $(function(){
 	@randomAnimals    :    用于装打乱顺序之后的棋子数组
 	@domAnimalName    :    用于输出到dom的棋子数组
 	*/
-	
+
+	var piecesArray=[];
+
+	function Pieces(name,team,x,y){
+		this.name = name;
+		this.team = team;
+		this.x = x;
+		this.y = y;
+		this.deriction = function(){};
+	}
+
+
 	var animalObj = {
 		init : function(){
 			var animals = [1, 2, 3, 4, 5, 6, 7, 8, -1, -2, -3, -4, -5, -6, -7, -8],
@@ -27,6 +38,7 @@ $(function(){
 				domAnimalName[i].team = randomAnimals[i];
 				domAnimalName[i].name = animalName[Math.abs(randomAnimals[i]) -1];
 				$('.animals').append($('<div class="animal hide animal'+(i+1)+'"></div>').attr("team", domAnimalName[i].team).text(domAnimalName[i].name));
+	piecesArray.push(new Pieces(animalName[Math.abs(randomAnimals[i]) -1], randomAnimals[i],i%4,Math.floor(i / 4)));
 			}
 			//  添加坐标
 			$('.animal').each(function(i){
@@ -88,5 +100,5 @@ $(function(){
 	$('.animals').on('click','.hide',animalObj.showCard);
 	$('.animals').on('click','.normal',animalObj.activeCard);
 
-
+console.log(a);
 });
