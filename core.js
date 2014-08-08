@@ -110,6 +110,7 @@ $(function(){
 				dtop = dright = dbottom = dleft = 1;
 				animalObj.judge(dtop, dright, dbottom, dleft, coordinate);
 			}
+			animalObj.findNext(dtop, dright, dbottom, dleft, coordinate);
 			$('.active').append('<div class="deriction"><div class="top '+(dtop?'':'none')+'"></div><div class="right '+(dright?'':'none')+'"></div><div class="bottom '+(dbottom?'':'none')+'"></div><div class="left '+(dleft?'':'none')+'"></div></div>');
 		},
 		compare : function(judgeThis,judgeObj,judgeDeriction){
@@ -149,10 +150,18 @@ $(function(){
 					_obj = $('.c'+c.x+c.y);
 					animalObj.compare(_this, _obj, 'l');
 			}
+		},
+		findNext : function(t, r, b, l, c){
+			$('.next').removeClass('next');
+			t ? $('.c'+c.x+(c.y-1)).addClass('next') : 0;
+			r ? $('.c'+(c.x+1)+c.y).addClass('next') : 0;
+			b ? $('.c'+c.x+(c.y+1)).addClass('next') : 0;
+			l ? $('.c'+(c.x-1)+c.y).addClass('next') : 0;
 		}
 	};
 
 	animalObj.init();
 	$('.animals').on('click','.hide',animalObj.showCard);
 	$('.animals').on('click','.normal',animalObj.activeCard);
+	// active--> next
 });

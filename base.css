@@ -29,6 +29,7 @@ body{width: 100%; height: 100%;}
 .animal{position: absolute; width: 30px; height: 30px; background: yellow; border-radius: 50%; color: #fff; font-weight: bold; line-height: 30px; cursor: pointer;}
 .animal.hide{position: absolute; width: 30px; height: 30px; background: yellow; text-indent: -9999px; border-radius: 50%; color: #fff; font-weight: bold; line-height: 30px; cursor: pointer;}
 .animal.active{border: 1px solid blue;}
+.animal.next{border: 3px solid gray;}
 .animal1{top: 0px;left: 0px;}
 .animal2{top: 0px;left: 101px;}
 .animal3{top: 0px;left: 202px;}
