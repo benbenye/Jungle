@@ -24,7 +24,9 @@ $(function(){
 	}*/
 
 
+	var dtop = dright = dbottom = dleft = 0;
 	var animalObj = {
+
 		init : function(){
 			var animals = [1, 2, 3, 4, 5, 6, 7, 8, -1, -2, -3, -4, -5, -6, -7, -8],
 				random = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15],
@@ -67,47 +69,9 @@ $(function(){
 			var coordinate = $(this).data('coordinate');
 			animalObj.deriction(coordinate);
 		},
-		compare : function(judgeThis,judgeObj,judgeDeriction){
-			if(judgeThis.hasClass('hide')){
-				//未翻牌
-				judgeDeriction == 't' ? dtop = 0 : judgeDeriction == 'r' ? dright = 0 : judgeDeriction == 'b' ? dbottom = 0 : dleft = 0 ; 
-			}else{
-				if(judgeThis.attr('team') * judgeObj.attr('team') > 0){
-					// 同一方的棋子
-					judgeDeriction == 't' ? dtop = 0 : judgeDeriction == 'r' ? dright = 0 : judgeDeriction == 'b' ? dbottom = 0 : dleft = 0 ; 
-				}else if(Math.abs(judgeThis.attr('team')) < Math.abs(judgeObj.attr('team'))){
-					// 级别比自己大
-					judgeDeriction == 't' ? dtop = 0 : judgeDeriction == 'r' ? dright = 0 : judgeDeriction == 'b' ? dbottom = 0 : dleft = 0 ; 
-				}
-			}
-		},
-		judge : function(t, r, b, l, c){
-			// 找到对应方向的对象
-			if(t){//dtop
-				var _this = $('.c'+c.x+(c.y-1)),
-					_obj = $('.c'+c.x+c.y);
-					animalObj.compare(_this, _obj, 't');
-
-			}
-			if(r){//dright
-				var _this = $('.c'+(c.x+1)+c.y),
-					_obj = $('.c'+c.x+c.y);
-					animalObj.compare(_this, _obj, 'r');
-			}
-			if(b){//dbottom
-				var _this = $('.c'+c.x+(c.y+1)),
-					_obj = $('.c'+c.x+c.y);
-					animalObj.compare(_this, _obj, 'b');
-			}
-			if(l){//dleft
-				var _this = $('.c'+(c.x-1)+c.y),
-					_obj = $('.c'+c.x+c.y);
-					animalObj.compare(_this, _obj, 'l');
-			}
-		},
 		deriction : function(coordinate){
 			$('.deriction').remove();
-			var dtop = dright = dbottom = dleft = 0;
+			dtop = dright = dbottom = dleft = 0;
 			if(coordinate.x === 0 && coordinate.y === 0){
 				//左上角
 				dright = dbottom = 1;
@@ -147,6 +111,44 @@ $(function(){
 				animalObj.judge(dtop, dright, dbottom, dleft, coordinate);
 			}
 			$('.active').append('<div class="deriction"><div class="top '+(dtop?'':'none')+'"></div><div class="right '+(dright?'':'none')+'"></div><div class="bottom '+(dbottom?'':'none')+'"></div><div class="left '+(dleft?'':'none')+'"></div></div>');
+		},
+		compare : function(judgeThis,judgeObj,judgeDeriction){
+			if(judgeThis.hasClass('hide')){
+				//未翻牌
+				judgeDeriction == 't' ? dtop = 0 : judgeDeriction == 'r' ? dright = 0 : judgeDeriction == 'b' ? dbottom = 0 : dleft = 0 ; 
+			}else{
+				if(judgeThis.attr('team') * judgeObj.attr('team') > 0){
+					// 同一方的棋子
+					judgeDeriction == 't' ? dtop = 0 : judgeDeriction == 'r' ? dright = 0 : judgeDeriction == 'b' ? dbottom = 0 : dleft = 0 ; 
+				}else if(Math.abs(judgeThis.attr('team')) < Math.abs(judgeObj.attr('team'))){
+					// 级别比自己大
+					judgeDeriction == 't' ? dtop = 0 : judgeDeriction == 'r' ? dright = 0 : judgeDeriction == 'b' ? dbottom = 0 : dleft = 0 ; 
+				}
+			}
+		},
+		judge : function(t, r, b, l, c){
+			// 找到对应方向的对象
+			if(t){//dtop
+				var _this = $('.c'+c.x+(c.y-1)),
+					_obj = $('.c'+c.x+c.y);
+					animalObj.compare(_this, _obj, 't');
+
+			}
+			if(r){//dright
+				var _this = $('.c'+(c.x+1)+c.y),
+					_obj = $('.c'+c.x+c.y);
+					animalObj.compare(_this, _obj, 'r');
+			}
+			if(b){//dbottom
+				var _this = $('.c'+c.x+(c.y+1)),
+					_obj = $('.c'+c.x+c.y);
+					animalObj.compare(_this, _obj, 'b');
+			}
+			if(l){//dleft
+				var _this = $('.c'+(c.x-1)+c.y),
+					_obj = $('.c'+c.x+c.y);
+					animalObj.compare(_this, _obj, 'l');
+			}
 		}
 	};
 
