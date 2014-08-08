@@ -64,8 +64,8 @@ $(function(){
 
 		},
 		activeCard : function(){
-			$('.active').removeClass('active');
-			$(this).addClass('active');
+			$('.active').removeClass('active').addClass('normal');
+			$(this).addClass('active').removeClass('normal');
 			var coordinate = $(this).data('coordinate');
 			animalObj.deriction(coordinate);
 		},
@@ -153,15 +153,27 @@ $(function(){
 		},
 		findNext : function(t, r, b, l, c){
 			$('.next').removeClass('next');
-			t ? $('.c'+c.x+(c.y-1)).addClass('next') : 0;
-			r ? $('.c'+(c.x+1)+c.y).addClass('next') : 0;
-			b ? $('.c'+c.x+(c.y+1)).addClass('next') : 0;
-			l ? $('.c'+(c.x-1)+c.y).addClass('next') : 0;
+			t ? $('.c'+c.x+(c.y-1)).addClass('next').removeClass('normal') : 0;
+			r ? $('.c'+(c.x+1)+c.y).addClass('next').removeClass('normal') : 0;
+			b ? $('.c'+c.x+(c.y+1)).addClass('next').removeClass('normal') : 0;
+			l ? $('.c'+(c.x-1)+c.y).addClass('next').removeClass('normal') : 0;
+		},
+		eat : function(active,next){
+			// 测试
+			var coo = $(this).data('coordinate'),
+				posT = $(this).css('top'),
+				posL = $(this).css('left');
+			$(this).detach();
+			$('.active').data('coordinate').x = coo.x;
+			$('.active').data('coordinate').y = coo.y;
+			$('.active').find('.deriction').detach();
+			$('.active').animate({top:posT,left:posL});
 		}
 	};
 
 	animalObj.init();
 	$('.animals').on('click','.hide',animalObj.showCard);
 	$('.animals').on('click','.normal',animalObj.activeCard);
+	$('.animals').on('click','.next',animalObj.eat);
 	// active--> next
 });
