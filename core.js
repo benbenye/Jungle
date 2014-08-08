@@ -114,18 +114,24 @@ $(function(){
 			$('.active').append('<div class="deriction"><div class="top '+(dtop?'':'none')+'"></div><div class="right '+(dright?'':'none')+'"></div><div class="bottom '+(dbottom?'':'none')+'"></div><div class="left '+(dleft?'':'none')+'"></div></div>');
 		},
 		compare : function(judgeThis,judgeObj,judgeDeriction){
-			if(judgeThis.hasClass('hide')){
-				//未翻牌
+			if(judgeThis.length == 0){
+				// 没有棋子
 				judgeDeriction == 't' ? dtop = 0 : judgeDeriction == 'r' ? dright = 0 : judgeDeriction == 'b' ? dbottom = 0 : dleft = 0 ; 
 			}else{
-				if(judgeThis.attr('team') * judgeObj.attr('team') > 0){
-					// 同一方的棋子
+				if(judgeThis.hasClass('hide')){
+					//未翻牌
 					judgeDeriction == 't' ? dtop = 0 : judgeDeriction == 'r' ? dright = 0 : judgeDeriction == 'b' ? dbottom = 0 : dleft = 0 ; 
-				}else if(Math.abs(judgeThis.attr('team')) < Math.abs(judgeObj.attr('team'))){
-					// 级别比自己大
-					judgeDeriction == 't' ? dtop = 0 : judgeDeriction == 'r' ? dright = 0 : judgeDeriction == 'b' ? dbottom = 0 : dleft = 0 ; 
+				}else{
+					if(judgeThis.attr('team') * judgeObj.attr('team') > 0){
+						// 同一方的棋子
+						judgeDeriction == 't' ? dtop = 0 : judgeDeriction == 'r' ? dright = 0 : judgeDeriction == 'b' ? dbottom = 0 : dleft = 0 ; 
+					}else if(Math.abs(judgeThis.attr('team')) < Math.abs(judgeObj.attr('team'))){
+						// 级别比自己大
+						judgeDeriction == 't' ? dtop = 0 : judgeDeriction == 'r' ? dright = 0 : judgeDeriction == 'b' ? dbottom = 0 : dleft = 0 ; 
+					}
 				}
 			}
+			
 		},
 		judge : function(t, r, b, l, c){
 			// 找到对应方向的对象
@@ -166,6 +172,7 @@ $(function(){
 			$(this).detach();
 			$('.active').data('coordinate').x = coo.x;
 			$('.active').data('coordinate').y = coo.y;
+			$('.active').removeClass($('.active').attr('class').split(' ')[2]).addClass('c'+coo.x+coo.y);
 			$('.active').find('.deriction').detach();
 			$('.active').animate({top:posT,left:posL});
 		}
